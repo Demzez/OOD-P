@@ -3,9 +3,6 @@
   <component name="KotlinNotebookOptionsProvider">
     <option name="jdkName" value="openjdk-24" />
   </component>
-  <component name="ProjectDictionaryState">
-    <dictionary name="project" />
-  </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
       <profile-state>
@@ -16,5 +13,8 @@
         </selected-state>
       </profile-state>
     </entry>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_24" default="true" project-jdk-name="openjdk-24" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>
