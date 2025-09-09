@@ -1,7 +1,7 @@
 class Freeze extends InstantCoffee {
     private boolean isPacked;
 
-    public Freeze(String countryOfOrigin, double basePrice, double jarVolume, boolean isPacked) {
+    public Freeze(String countryOfOrigin, double basePrice, int jarVolume, boolean isPacked) {
         super("Сублимированный", basePrice, countryOfOrigin, jarVolume);
         this.isPacked = isPacked;
     }

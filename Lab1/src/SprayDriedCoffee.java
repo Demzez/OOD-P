@@ -1,7 +1,7 @@
 class Spray extends InstantCoffee {
     private boolean isPacked;
 
-    public Spray(String countryOfOrigin, double basePrice, double jarVolume, boolean isPacked) {
+    public Spray(String countryOfOrigin, double basePrice, int jarVolume, boolean isPacked) {
         super("Порошковый", basePrice, countryOfOrigin, jarVolume);
         this.isPacked = isPacked;
     }

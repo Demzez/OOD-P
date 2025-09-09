@@ -2,7 +2,7 @@
 class Arabica extends CoffeeBean {
     private boolean isWashed;
 
-    public Arabica(String countryOfOrigin, double basePrice, double weight, boolean isWashed) {
+    public Arabica(String countryOfOrigin, double basePrice, int weight, boolean isWashed) {
         super("Арабика", basePrice, countryOfOrigin, weight);
         this.isWashed = isWashed;
     }

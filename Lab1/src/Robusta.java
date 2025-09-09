@@ -2,7 +2,7 @@
 class Robusta extends CoffeeBean {
     private boolean isWashed;
 
-    public Robusta(String countryOfOrigin, double basePrice, double weight, boolean isWashed) {
+    public Robusta(String countryOfOrigin, double basePrice, int weight, boolean isWashed) {
         super("Робуста", basePrice, countryOfOrigin, weight);
         this.isWashed = isWashed;
     }

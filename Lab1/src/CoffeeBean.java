@@ -2,7 +2,7 @@ abstract class CoffeeBean extends Coffee {
     private String countryOfOrigin;
     private int weight;
 
-    public CoffeeBean(String name, double basePrice, String countryOfOrigin, double weight) {
+    public CoffeeBean(String name, double basePrice, String countryOfOrigin, int weight) {
         super(name, basePrice);
         this.countryOfOrigin = countryOfOrigin;
         setWeight(weight);
@@ -20,12 +20,12 @@ abstract class CoffeeBean extends Coffee {
         return weight;
     }
 
-    public void setWeight(double weight) {
+    public void setWeight(int weight) {
         if (weight > 0) {
             this.weight = weight;
+        }
         else {
             this.weight = 0;
-            }
         }
     }
 

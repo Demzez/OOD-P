@@ -19,9 +19,9 @@ abstract class InstantCoffee extends Coffee {
     public void setJarVolume(int jarVolume) {
         if (jarVolume > 0) {
             this.jarVolume = jarVolume;
+        }
         else {
-            this.jarVolume = 0
-            }
+                this.jarVolume = 0;
         }
     }
 

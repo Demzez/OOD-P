@@ -1,4 +1,6 @@
-// Класс-корзина для управления заказом
+import java.util.ArrayList;
+import java.util.List;
+
 class ShoppingCart {
     private List<Coffee> items;
 
@@ -34,5 +36,4 @@ class ShoppingCart {
         items.clear();
         System.out.println("Корзина очищена.");
     }
-
 }
