@@ -1,43 +1,37 @@
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 class StorageOfCoffee {
-    private HashMap<String, Integer> products;
+    private List<Coffee> products;
 
-    public StorageOfCoffee() { products = new HashMap<>(); }
+    public StorageOfCoffee() { products = new ArrayList<>(); }
 
-    public void Refill() {
-        products.put ("Arabica", 22222);
-        products.put ("Robusta", 22222);
-        products.put ("Spray", 22222);
-        products.put ("Freeze", 22222);
+    public void addProduct(Coffee coffee) {
+        products.add(coffee);
     }
 
-    public void ShowStore() {
-        for (Map.Entry<String, Integer> entry : products.entrySet()) {
-            System.out.println(entry.getKey() + " = " + entry.getValue());
+    public void showStorage() {
+        if (products.isEmpty()) {
+            System.out.println("Полки пусты.");
+            return;
+        }
+        System.out.println("\n=== Ассортимент Кофе ===");
+        for (int i = 0; i < products.size(); i++) {
+            System.out.println((i + 1) + ". " + products.get(i));
         }
     }
 
-    public void BuySomeQuantity(String nameOfCoffee, Integer subtractQuantity) {
-        Integer currentQuantity = products.get(nameOfCoffee);
-        if (currentQuantity - subtractQuantity >= 0) {
-            products.replace(nameOfCoffee, currentQuantity - subtractQuantity);
+    public void BuySomeProduct(Coffee coffee) {
+        if (products.contains(coffee)) {
+            products.remove(coffee);
         }
         else {
-            System.out.println("Покупка отклонена, на складе не достаточно товара.");
+            System.out.println("Покупка отклонена, на складе нет товара.");
         }
     }
 
-    public void AddCurrentCoffee(String nameOfCoffee, Integer subtractQuantity) {
-        Integer currentQuantity = products.get(nameOfCoffee);
-        products.replace(nameOfCoffee, currentQuantity + subtractQuantity);
+    public void clearStorage() {
+        products.clear();
+        System.out.println("Хранилище очищено.");
     }
-
-    public HashMap<String, Integer> getProducts() {
-        return products;
-    }
-
-    public void setProducts(HashMap<String, Integer> products) { this.products = products; }
-
 }
