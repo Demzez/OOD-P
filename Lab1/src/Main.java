@@ -4,10 +4,117 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        StorageOfCoffee storage = new StorageOfCoffee();
+        ShoppingCart cart = new ShoppingCart();
+        boolean isRunning = true;
+        String login;
 
+        while (true) {
+            System.out.println("Добро пожаловать. Введите свой логин:");
+            System.out.println("Доступные логины: admin, person");
+            login = scanner.nextLine();
+            if (login.equals("admin") || login.equals("person")) {
+                break;
+            }
+            System.out.println("Неверный логин. Попробуйте снова.");
+        }
+
+        switch (login) {
+            case "admin":
+                adminMenu(scanner, storage);
+                break;
+            case "person":
+                userMenu(scanner, storage, cart);
+                break;
+        }
     }
-    
-    public static void initializeStorage(StorageOfCoffee storage) {
+
+    // Меню администратора
+    private static void adminMenu(Scanner scanner, StorageOfCoffee storage) {
+        boolean isRunning = true;
+
+        while (isRunning) {
+            System.out.println("\n=== АДМИНИСТРАТОРСКОЕ МЕНЮ ===");
+            System.out.println("1. Показать склад");
+            System.out.println("2. Завести новый товар.");
+            System.out.println("3. Очистить склад");
+            System.out.println("4. Добавить товар вручную.");
+            System.out.println("5. Выход");
+            System.out.print("Выберите действие: ");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // очистка буфера
+
+            switch (choice) {
+                case 1:
+                    storage.showStorage();
+                    break;
+                case 2:
+                    initializeStorage(storage);
+                    System.out.println("Склад заполнен товаром!");
+                    break;
+                case 3:
+                    storage.clearStorage();
+                    break;
+                case 4:
+                    addProductManually(scanner, storage);
+                    break;
+                case 5:
+                    isRunning = false;
+                    System.out.println("Выход из администраторского меню.");
+                    break;
+                default:
+                    System.out.println("Неверный выбор. Попробуйте снова.");
+            }
+        }
+    }
+
+    // Меню пользователя
+    private static void userMenu(Scanner scanner, StorageOfCoffee storage, ShoppingCart cart) {
+        boolean isRunning = true;
+
+        while (isRunning) {
+            System.out.println("\n=== ПОЛЬЗОВАТЕЛЬСКОЕ МЕНЮ ===");
+            System.out.println("1. Просмотреть ассортимент");
+            System.out.println("2. Добавить товар в корзину");
+            System.out.println("3. Просмотреть корзину");
+            System.out.println("4. Очистить корзину");
+            System.out.println("5. Оформить покупку");
+            System.out.println("6. Выход");
+            System.out.print("Выберите действие: ");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // очистка буфера
+
+            switch (choice) {
+                case 1:
+                    storage.showStorage();
+                    break;
+                case 2:
+                    addToCart(scanner, storage, cart);
+                    break;
+                case 3:
+                    cart.showCart();
+                    System.out.printf("Общая сумма: %.2f руб.\n", cart.calculateTotal());
+                    break;
+                case 4:
+                    cart.clearCart();
+                    break;
+                case 5:
+                    checkout(cart);
+                    break;
+                case 6:
+                    isRunning = false;
+                    System.out.println("Выход из пользовательского меню.");
+                    break;
+                default:
+                    System.out.println("Неверный выбор. Попробуйте снова.");
+            }
+        }
+    }
+
+    private static void initializeStorage(StorageOfCoffee storage) {
         // Арабика - 10 позиций
         storage.addProduct(new Arabica("Бразилия", 15.0, 500, true));
         storage.addProduct(new Arabica("Колумбия", 18.0, 250, false));
@@ -58,5 +165,7 @@ public class Main {
         storage.addProduct(new Freeze("Швейцария Премиум", 15.0, 100, true));
         storage.addProduct(new Spray("Органический", 12.0, 200, false));
     }
+
+
 }
 
