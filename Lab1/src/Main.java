@@ -10,23 +10,28 @@ public class Main {
         boolean isRunning = true;
         String login;
 
+        outerLoop:
         while (true) {
-            System.out.println("Добро пожаловать. Введите свой логин:");
-            System.out.println("Доступные логины: admin, person");
-            login = scanner.nextLine();
-            if (login.equals("admin") || login.equals("person")) {
-                break;
+            while (true) {
+                System.out.println("Добро пожаловать. Введите свой логин:");
+                System.out.println("Доступные логины: admin, person, end-для окончания работы.");
+                login = scanner.nextLine();
+                if (login.equals("admin") || login.equals("person") || login.equals("end")) {
+                    break;
+                }
+                System.out.println("Неверный логин. Попробуйте снова.");
             }
-            System.out.println("Неверный логин. Попробуйте снова.");
-        }
 
-        switch (login) {
-            case "admin":
-                adminMenu(scanner, storage);
-                break;
-            case "person":
-                userMenu(scanner, storage, cart);
-                break;
+            switch (login) {
+                case "admin":
+                    adminMenu(scanner, storage);
+                    break;
+                case "person":
+                    userMenu(scanner, storage, cart);
+                    break;
+                case "end":
+                    break outerLoop;
+            }
         }
     }
 
@@ -52,7 +57,7 @@ public class Main {
                     break;
                 case 2:
                     initializeStorage(storage);
-                    System.out.println("Склад заполнен товаром!");
+                    System.out.println("Товар довезен!");
                     break;
                 case 3:
                     storage.clearStorage();
@@ -102,11 +107,17 @@ public class Main {
                     cart.clearCart();
                     break;
                 case 5:
-                    checkout(cart);
+                    cart.checkout();
+                    cart.clearCart();
+                    isRunning = false;
                     break;
                 case 6:
                     isRunning = false;
                     System.out.println("Выход из пользовательского меню.");
+                    for (int i = 0; i < cart.getItems().size(); i++) {
+                        storage.addProduct(cart.getItems().get(i));
+                    }
+                    cart.clearCart();
                     break;
                 default:
                     System.out.println("Неверный выбор. Попробуйте снова.");
@@ -163,9 +174,62 @@ public class Main {
         storage.addProduct(new Arabica("Гавайи", 35.0, 100, true));
         storage.addProduct(new Arabica("Ямайка Блю Маунтин", 45.0, 250, false));
         storage.addProduct(new Freeze("Швейцария Премиум", 15.0, 100, true));
-        storage.addProduct(new Spray("Органический", 12.0, 200, false));
+        storage.addProduct(new Spray("Карибы", 100.0, 200, false));
     }
 
+    private static void addProductManually(Scanner scanner, StorageOfCoffee storage) {
+        String typeOfCoffee;
+        while (true) {
+            System.out.println("Введите вид кофе:");
+            typeOfCoffee  = scanner.nextLine();
+            if (typeOfCoffee.equals("Arabica") || typeOfCoffee.equals("Robusta") || typeOfCoffee.equals("Spray") || typeOfCoffee.equals("Freeze")) {
+                break;
+            }
+            else {
+                System.out.println("Такого кофе не существует.");
+            }
+        }
+        System.out.println("Введите строну происхождения:");
+        String countryOfOrigin = scanner.nextLine();
+        System.out.println("Введите начальную цену:");
+        double basePrice = scanner.nextDouble();
+        System.out.println("Введите вес банки/покета:");
+        int weight = scanner.nextInt();
+        System.out.println("Нужна ли дополнительная обработка(true/false):");
+        boolean isOk = scanner.nextBoolean();
+
+        switch (typeOfCoffee){
+            case "Arabica":
+                storage.addProduct(new Arabica(countryOfOrigin, basePrice, weight, isOk));
+                break;
+            case "Robusta":
+                storage.addProduct(new Robusta(countryOfOrigin, basePrice, weight, isOk));
+                break;
+            case "Spray":
+                storage.addProduct(new Spray(countryOfOrigin, basePrice, weight, isOk));
+                break;
+            case "Freeze":
+                storage.addProduct(new Freeze(countryOfOrigin, basePrice, weight, isOk));
+                break;
+        }
+
+    }
+
+    private static void addToCart(Scanner scanner, StorageOfCoffee storage, ShoppingCart cart) {
+        int number;
+        while (true) {
+            System.out.println("Введите номер кофе для покупки:");
+            number = scanner.nextInt();
+            if (number-1 < storage.getProducts().size() && number >= 0) {
+                break;
+            }
+            else {
+                System.out.println("Товара под таким номером не существует.");
+            }
+        }
+        cart.addItem(storage.getProducts().get(number-1));
+        storage.BuySomeProduct(number);
+    }
 
 }
 

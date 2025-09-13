@@ -17,21 +17,25 @@ class StorageOfCoffee {
         }
         System.out.println("\n=== Ассортимент Кофе ===");
         for (int i = 0; i < products.size(); i++) {
-            System.out.println((i + 1) + ". " + products.get(i));
+            System.out.println((i + 1) + "." + products.get(i));
         }
     }
 
-    public void BuySomeProduct(Coffee coffee) {
-        if (products.contains(coffee)) {
-            products.remove(coffee);
+    public void BuySomeProduct(int number) {
+        if (number-1 <= products.size() && number >= 0) {
+            products.remove(products.get(number-1));
         }
         else {
-            System.out.println("Покупка отклонена, на складе нет товара.");
+            System.out.println("Покупка отклонена, на складе нет товара под данным номером.");
         }
     }
 
     public void clearStorage() {
         products.clear();
         System.out.println("Хранилище очищено.");
+    }
+
+    public List<Coffee> getProducts() {
+        return products;
     }
 }

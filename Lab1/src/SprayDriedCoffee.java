@@ -11,7 +11,7 @@ class Spray extends InstantCoffee {
     public double calculatePrice() {
         double total = super.calculatePrice(); // Базовая стоимость
         if (isPacked) {
-            total += 10 * getJarVolume(); // Надбавка за мытый процесс
+            total += 0.75; // Надбавка за мытый процесс
         }
         return total;
     }

@@ -33,6 +33,6 @@ abstract class Coffee {
 
     @Override
     public String toString() {
-        return String.format("%s (Базовая цена: %.2f руб.)", name, basePrice);
+        return String.format("%s (Цена за килограмм: %.2f руб.)", name, basePrice);
     }
 }

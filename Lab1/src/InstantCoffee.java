@@ -28,7 +28,7 @@ abstract class InstantCoffee extends Coffee {
     @Override
     public double calculatePrice() {
 
-        return getBasePrice() * jarVolume;
+        return getBasePrice() * jarVolume / 1000;
     }
 
     @Override

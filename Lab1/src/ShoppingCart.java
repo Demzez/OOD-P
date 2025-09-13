@@ -24,6 +24,16 @@ class ShoppingCart {
         }
     }
 
+    public void checkout() {
+        System.out.println("\n=== ВАШИ ПОКУПКИ ===");
+        double yourPrice = 0;
+        for (int i = 0; i < items.size(); i++) {
+            yourPrice += items.get(i).calculatePrice();
+            System.out.println((i + 1) + "." + items.get(i));
+        }
+        System.out.println("Сумма покупки: " + yourPrice + " руб.");
+    }
+
     public double calculateTotal() {
         double total = 0;
         for (Coffee item : items) {
@@ -35,5 +45,9 @@ class ShoppingCart {
     public void clearCart() {
         items.clear();
         System.out.println("Корзина очищена.");
+    }
+
+    public List<Coffee> getItems() {
+        return items;
     }
 }

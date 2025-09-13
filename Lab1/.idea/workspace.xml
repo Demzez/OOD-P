@@ -6,7 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="a291272f-c0e9-4988-a017-202dbf9215a0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Arabica.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Arabica.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Coffee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Coffee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CoffeeBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoffeeBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FreezeDriedCoffee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FreezeDriedCoffee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/InstantCoffee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InstantCoffee.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Robusta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Robusta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ShoppingCart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ShoppingCart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SprayDriedCoffee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SprayDriedCoffee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/StorageOfCoffee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StorageOfCoffee.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,22 +70,13 @@
       <workItem from="1757446156858" duration="409000" />
       <workItem from="1757488165943" duration="2130000" />
       <workItem from="1757516449578" duration="6734000" />
-      <workItem from="1757619905111" duration="1787000" />
+      <workItem from="1757619905111" duration="2207000" />
+      <workItem from="1757748892739" duration="3338000" />
+      <workItem from="1757753943298" duration="3273000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Main.java</url>
-          <line>118</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

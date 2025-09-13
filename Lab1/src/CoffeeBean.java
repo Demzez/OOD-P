@@ -32,11 +32,11 @@ abstract class CoffeeBean extends Coffee {
     @Override
     public double calculatePrice() {
 
-        return getBasePrice() * weight;
+        return getBasePrice() * weight / 1000;
     }
 
     @Override
     public String toString() {
-        return super.toString() + String.format(", Страна: %s, Вес: %.d г", countryOfOrigin, weight);
+        return super.toString() + String.format(", Страна: %s, Вес: %d г", countryOfOrigin, weight);
     }
 }

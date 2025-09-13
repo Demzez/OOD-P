@@ -12,7 +12,7 @@ class Robusta extends CoffeeBean {
     public double calculatePrice() {
         double total = super.calculatePrice(); // Базовая стоимость
         if (isWashed) {
-            total += 10 * getWeight(); // Надбавка за мытый процесс
+            total += 1; // Надбавка за мытый процесс
         }
         return total;
     }
@@ -27,6 +27,6 @@ class Robusta extends CoffeeBean {
 
     @Override
     public String toString() {
-        return super.toString() + String.format(", Тип: %s, Итоговая цена: %.2f руб.", (isWashed ? "Мытый" : "Натуральный"), calculatePrice());
+        return super.toString() + String.format(", Тип: %s, Итоговая цена: %.2f руб.", (isWashed ? "Мытый" : "Обычный"), calculatePrice());
     }
 }
