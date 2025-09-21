@@ -1,3 +1,4 @@
+import java.awt.desktop.SystemSleepEvent;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -20,8 +21,25 @@ class MenuHandler {
         });
         adminMenuActions.put(3, () -> storage.clearStorage());
         adminMenuActions.put(4, () -> addProductManually(scanner, storage));
-    }
+        adminMenuActions.put(6, () -> {
+            System.out.println("Запуск многопоточной сортировки...");
 
+            Thread ascThread = new Thread(new AscendingSortTask(storage));
+            Thread descThread = new Thread(new DescendingSortTask(storage));
+
+            ascThread.start();
+            descThread.start();
+
+            try {
+                // Ждем завершения обоих потоков
+                ascThread.join();
+                descThread.join();
+                System.out.println("Обе сортировки завершены!");
+            } catch (InterruptedException e) {
+                System.out.println("Сортировка была прервана");
+            }
+        });
+    }
     private void initializeUserMenu(Scanner scanner, StorageOfCoffee storage, ShoppingCart cart) {
         userMenuActions = new HashMap<>();
         userMenuActions.put(1, () -> storage.showStorage());
@@ -111,7 +129,7 @@ class MenuHandler {
                 System.out.println("Такого кофе не существует.");
             }
         }
-        System.out.println("Введите строну происхождения:");
+        System.out.println("Введите страну происхождения:");
         String countryOfOrigin = scanner.nextLine();
         System.out.println("Введите начальную цену:");
         double basePrice = scanner.nextDouble();
@@ -151,5 +169,33 @@ class MenuHandler {
         }
         cart.addItem(storage.getProducts().get(number-1));
         storage.BuySomeProduct(number);
+    }
+}
+
+
+
+class AscendingSortTask implements Runnable {
+    private StorageOfCoffee storage;
+
+    public AscendingSortTask(StorageOfCoffee storage) {
+        this.storage = storage;
+    }
+
+    @Override
+    public void run() {
+        storage.sortAscending();
+    }
+}
+
+class DescendingSortTask implements Runnable {
+    private StorageOfCoffee storage;
+
+    public DescendingSortTask(StorageOfCoffee storage) {
+        this.storage = storage;
+    }
+
+    @Override
+    public void run() {
+        storage.sortDescending();
     }
 }

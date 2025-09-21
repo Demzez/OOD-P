@@ -1,13 +1,18 @@
 import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Main {
+    private static volatile String currentLogin = "";
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         StorageOfCoffee storage = new StorageOfCoffee();
         ShoppingCart cart = new ShoppingCart();
         MenuHandler menu = new MenuHandler(scanner, storage, cart);
-        boolean isRunning = true;
         String login;
+        boolean isRunning = true;
+        ExecutorService executor = Executors.newSingleThreadExecutor();
 
         outerLoop:
         while (true) {
@@ -26,7 +31,11 @@ public class Main {
                     adminMenu(scanner, storage, menu);
                     break;
                 case "person":
+                    currentLogin = login; // Изменяем volatile переменную
+                    PromotionAction currentPromotion = new PromotionAction(storage, cart, () -> currentLogin);
+                    executor.execute(currentPromotion);
                     userMenu(scanner, storage, cart, menu);
+                    currentLogin = "";
                     break;
                 case "end":
                     break outerLoop;
@@ -45,7 +54,8 @@ public class Main {
             System.out.println("3. Очистить склад");
             System.out.println("4. Добавить товар вручную.");
             System.out.println("5. Выход");
-            System.out.print("Выберите действие: ");
+            System.out.println("6. Отсортировать ассортимент (многопоточная сортировка)");
+            System.out.print("Выберите действие: \n");
 
             int choice = scanner.nextInt();
             scanner.nextLine(); // очистка буфера
@@ -53,7 +63,6 @@ public class Main {
             if (choice == 5) {
                 isRunning = false;
                 System.out.println("Выход из администраторского меню.");
-                break;
             }
             else {
                 menu.executeAdminAction(choice);
@@ -73,7 +82,7 @@ public class Main {
             System.out.println("4. Очистить корзину");
             System.out.println("5. Оформить покупку");
             System.out.println("6. Выход");
-            System.out.print("Выберите действие: ");
+            System.out.print("Выберите действие: \n");
 
             int choice = scanner.nextInt();
             scanner.nextLine(); // очистка буфера
@@ -95,7 +104,5 @@ public class Main {
             }
         }
     }
-
-
 }
 

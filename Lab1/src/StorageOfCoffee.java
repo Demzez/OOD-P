@@ -38,4 +38,19 @@ class StorageOfCoffee {
     public List<Coffee> getProducts() {
         return products;
     }
+
+
+    // Многопоточные сортироки
+    public synchronized void sortAscending() {
+        products.sort((c1, c2) -> Double.compare(c1.calculatePrice(), c2.calculatePrice()));
+    }
+
+    public synchronized void sortDescending() {
+        products.sort((c1, c2) -> Double.compare(c2.calculatePrice(), c1.calculatePrice()));
+    }
+
+    // Потоковая функция добавления акционерных товаров
+    public synchronized void PromotionPlus() {
+
+    }
 }
