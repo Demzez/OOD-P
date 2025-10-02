@@ -1,4 +1,5 @@
 import java.awt.desktop.SystemSleepEvent;
+import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -6,10 +7,12 @@ import java.util.Scanner;
 class MenuHandler {
     private Map<Integer, Runnable> adminMenuActions;
     private Map<Integer, Runnable> userMenuActions;
+    private Map<Integer, Runnable> userAPIMethods;
 
     public MenuHandler(Scanner scanner, StorageOfCoffee storage, ShoppingCart cart) {
         initializeAdminMenu(scanner, storage);
         initializeUserMenu(scanner, storage, cart);
+        initializeUserAPI(scanner, storage);
     }
 
     private void initializeAdminMenu(Scanner scanner, StorageOfCoffee storage) {
@@ -21,24 +24,6 @@ class MenuHandler {
         });
         adminMenuActions.put(3, () -> storage.clearStorage());
         adminMenuActions.put(4, () -> addProductManually(scanner, storage));
-        adminMenuActions.put(6, () -> {
-            System.out.println("Запуск многопоточной сортировки...");
-
-            Thread ascThread = new Thread(new AscendingSortTask(storage));
-            Thread descThread = new Thread(new DescendingSortTask(storage));
-
-            ascThread.start();
-            descThread.start();
-
-            try {
-                // Ждем завершения обоих потоков
-                ascThread.join();
-                descThread.join();
-                System.out.println("Обе сортировки завершены!");
-            } catch (InterruptedException e) {
-                System.out.println("Сортировка была прервана");
-            }
-        });
     }
     private void initializeUserMenu(Scanner scanner, StorageOfCoffee storage, ShoppingCart cart) {
         userMenuActions = new HashMap<>();
@@ -54,14 +39,43 @@ class MenuHandler {
             cart.clearCart();
         });
     }
+    private void initializeUserAPI(Scanner scanner, StorageOfCoffee storage) {
+        userAPIMethods = new HashMap<>();
+        userAPIMethods.put(1, () -> storage.sortProductsByPrice());
+        userAPIMethods.put(2, () -> {
+            System.out.println("Введите максимальную цену для фильтрации:");
+            double maxPrice = scanner.nextDouble();
+            scanner.nextLine();
+            List<Coffee> filtered = storage.filterProductsByMaxPrice(maxPrice);
+            filtered.forEach(System.out::println); // ссылка на метод (эквивалентно x -> System.out.println(x))
+        });
+        userAPIMethods.put(3, () -> {
+            Map<String, Double> grouped = storage.getProductPriceMap();
+            grouped.forEach((country, price) -> {
+                System.out.println("Кофе: " + country + " (" +price+ "руб. )");
+            });
+        });
+        userAPIMethods.put(4, () -> {
+            Map<String, List<Coffee>> grouped = storage.groupProductsByCountry();
+            grouped.forEach((country, coffeeList) -> {
+                System.out.println("Страна: " + country + " (" + coffeeList.size() + " товаров)");
+            });
+        });
+        userAPIMethods.put(5, () -> {
+            storage.getUniqueTypesOfCoffee().forEach(System.out::println);
+        });
+    }
 
     public void executeAdminAction(int choice) {
         adminMenuActions.getOrDefault(choice,
                 () -> System.out.println("Неверный выбор. Попробуйте снова.")).run();
     }
-
     public void executeUserAction(int choice) {
         userMenuActions.getOrDefault(choice,
+                () -> System.out.println("Неверный выбор. Попробуйте снова.")).run();
+    }
+    public void executeUserAPI(int choice) {
+        userAPIMethods.getOrDefault(choice,
                 () -> System.out.println("Неверный выбор. Попробуйте снова.")).run();
     }
 
@@ -169,33 +183,5 @@ class MenuHandler {
         }
         cart.addItem(storage.getProducts().get(number-1));
         storage.BuySomeProduct(number);
-    }
-}
-
-
-
-class AscendingSortTask implements Runnable {
-    private StorageOfCoffee storage;
-
-    public AscendingSortTask(StorageOfCoffee storage) {
-        this.storage = storage;
-    }
-
-    @Override
-    public void run() {
-        storage.sortAscending();
-    }
-}
-
-class DescendingSortTask implements Runnable {
-    private StorageOfCoffee storage;
-
-    public DescendingSortTask(StorageOfCoffee storage) {
-        this.storage = storage;
-    }
-
-    @Override
-    public void run() {
-        storage.sortDescending();
     }
 }

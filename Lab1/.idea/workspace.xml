@@ -43,6 +43,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/demzez/BSUIR/Course project./PharmacyWebService/pharmacy-web-service&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -94,21 +95,29 @@
       <workItem from="1758210468825" duration="4493000" />
       <workItem from="1758272070435" duration="2844000" />
       <workItem from="1758453196561" duration="11602000" />
+      <workItem from="1758473245107" duration="88000" />
+      <workItem from="1758531901376" duration="1116000" />
+      <workItem from="1758741408221" duration="1012000" />
+      <workItem from="1758743814430" duration="106000" />
+      <workItem from="1758743928737" duration="20000" />
+      <workItem from="1759421717644" duration="1651000" />
+      <workItem from="1759424399042" duration="38000" />
+      <workItem from="1759430078344" duration="4562000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/MenuHandler.java</url>
-          <line>69</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

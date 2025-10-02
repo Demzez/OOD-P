@@ -31,11 +31,11 @@ public class Main {
                     adminMenu(scanner, storage, menu);
                     break;
                 case "person":
-                    currentLogin = login; // Изменяем volatile переменную
-                    PromotionAction currentPromotion = new PromotionAction(storage, cart, () -> currentLogin);
-                    executor.execute(currentPromotion);
+//                    currentLogin = login; // Изменяем volatile переменную
+//                    PromotionAction currentPromotion = new PromotionAction(storage, cart, () -> currentLogin);
+//                    executor.execute(currentPromotion);
                     userMenu(scanner, storage, cart, menu);
-                    currentLogin = "";
+//                    currentLogin = "";
                     break;
                 case "end":
                     break outerLoop;
@@ -54,7 +54,6 @@ public class Main {
             System.out.println("3. Очистить склад");
             System.out.println("4. Добавить товар вручную.");
             System.out.println("5. Выход");
-            System.out.println("6. Отсортировать ассортимент (многопоточная сортировка)");
             System.out.print("Выберите действие: \n");
 
             int choice = scanner.nextInt();
@@ -82,6 +81,7 @@ public class Main {
             System.out.println("4. Очистить корзину");
             System.out.println("5. Оформить покупку");
             System.out.println("6. Выход");
+            System.out.println("7. API функции");
             System.out.print("Выберите действие: \n");
 
             int choice = scanner.nextInt();
@@ -98,6 +98,17 @@ public class Main {
                     storage.addProduct(cart.getItems().get(i));
                 }
                 cart.clearCart();
+            } else if(choice == 7) {
+                System.out.println("1. Сортировать по цене");
+                System.out.println("2. Фильтровать до какой-то цены");
+                System.out.println("3. Укороченная сводка");
+                System.out.println("4. Количество товаров для каждой страны");
+                System.out.println("5. Показать все виды кофе");
+                System.out.print("Выберите действие: \n");
+                int choiceIN = scanner.nextInt();
+                scanner.nextLine();
+
+                menu.executeUserAPI(choiceIN);
             }
             else {
                 menu.executeUserAction(choice);
