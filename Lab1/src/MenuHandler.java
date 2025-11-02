@@ -15,6 +15,7 @@ class MenuHandler {
         initializeUserAPI(scanner, storage);
     }
 
+
     private void initializeAdminMenu(Scanner scanner, StorageOfCoffee storage) {
         adminMenuActions = new HashMap<>();
         adminMenuActions.put(1, () -> storage.showStorage());
@@ -52,7 +53,7 @@ class MenuHandler {
         userAPIMethods.put(3, () -> {
             Map<String, Double> grouped = storage.getProductPriceMap();
             grouped.forEach((country, price) -> {
-                System.out.println("Кофе: " + country + " (" +price+ "руб. )");
+                System.out.println("Кофе: " + country + " (" +price+ "руб.)");
             });
         });
         userAPIMethods.put(4, () -> {

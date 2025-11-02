@@ -68,7 +68,7 @@ class StorageOfCoffee {
                         Coffee::getBasePrice,
                         (existing, replacement) -> existing
                 ));
-        System.out.println("Создана карта цен товаров");
+        System.out.println("Создана короткая сводка.");
         return priceMap;
     }
 

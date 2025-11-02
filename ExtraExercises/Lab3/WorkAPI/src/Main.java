@@ -18,12 +18,12 @@ public class Main {
 
         List<Integer> listAscending = list.stream()
                 .sorted()
-                .collect(Collectors.toList());
+                .toList();
         System.out.println("That your ascending sort collection: " + listAscending);
 
         List<Integer> listWithoutThree = list.stream()
                 .filter(i -> i % 3 != 0 || i == 0)
-                .collect(Collectors.toList());
+                .toList();
         System.out.println("That your collection without three: " + listWithoutThree);
 
         String listIntToString = list.stream()
