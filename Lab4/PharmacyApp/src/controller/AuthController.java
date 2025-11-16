@@ -74,7 +74,6 @@ public class AuthController implements Observer {
 
     @Override
     public void update(String message) {
-        // Логирование системных сообщений
         System.out.println("Auth System: " + message);
     }
 
